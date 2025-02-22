@@ -1,1 +1,9 @@
-
+module memory_model();
+reg [7:0]mem [0:1023];//1024 locations of 8 bits word length(1kB)
+initial 
+begin
+mem[0]=8'b00000000;
+mem[1]=8'b10100100;
+end
+endmodule
+// cant access other modules , because there is no acess logic

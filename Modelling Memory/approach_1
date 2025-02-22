@@ -7,3 +7,4 @@ mem[1]=8'b10100100;
 end
 endmodule
 // cant access other modules , because there is no acess logic
+//and is harder to mention all memory by hand

@@ -1,1 +1,56 @@
+module booth_datapath (
+    input clk,
+    input reset,
+    input [7:0] M_in,        // Multiplicand (M)
+    input [7:0] Q_in,        // Multiplier (Q)
+    input Q_1_in,            // Previous Q (Q-1)
+    input start,             // Start signal for the operation
+    input [1:0] alu_control, // ALU control signals
+    input shift_enable,      // Enable shifting
+    output reg [15:0] result // Final multiplication result
+);
+
+    wire [7:0] alu_result;
+    wire [7:0] shifted_Q;
+    wire shifted_Q_1;
+    
+    // Instantiate Register File
+    register_file rf (
+        .clk(clk),
+        .reset(reset),
+        .M_in(M_in),
+        .Q_in(Q_in),
+        .Q_1_in(Q_1_in),
+        .load(start),
+        .M(result[15:8]),      // High part of the result (multiplicand)
+        .Q(result[7:0]),       // Low part of the result (multiplier)
+        .Q_1(shifted_Q_1)      // Previous Q-1 (shifted)
+    );
+
+    // Instantiate ALU
+    alu alu_unit (
+        .A(result[15:8]),      // Multiplicand M
+        .B(result[7:0]),       // Multiplier Q
+        .alu_control(alu_control),
+        .result(alu_result)
+    );
+
+    // Instantiate Shifter
+    shifter shift_unit (
+        .Q(result[7:0]),
+        .Q_1(shifted_Q_1),
+        .shift_enable(shift_enable),
+        .shifted_Q(shifted_Q),
+        .shifted_Q_1(shifted_Q_1)
+    );
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            result <= 16'b0;
+        end else if (start) begin
+            result[15:8] <= alu_result; // Store the ALU result in the upper part
+            result[7:0] <= shifted_Q;   // Store the shifted Q in the lower part
+        end
+    end
+endmodule
 

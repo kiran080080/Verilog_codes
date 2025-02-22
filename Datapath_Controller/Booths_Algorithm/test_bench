@@ -1,1 +1,53 @@
+module booth_tb();
+
+    reg clk;
+    reg reset;
+    reg start;
+    reg [7:0] M_in, Q_in;
+    wire [15:0] result;
+
+    // Instantiate Booth Datapath and Controller
+    booth_datapath uut_datapath (
+        .clk(clk),
+        .reset(reset),
+        .M_in(M_in),
+        .Q_in(Q_in),
+        .Q_1_in(1'b0),
+        .start(start),
+        .alu_control(2'b00),
+        .shift_enable(1'b1),
+        .result(result)
+    );
+
+    booth_controller uut_controller (
+        .clk(clk),
+        .reset(reset),
+        .start(start),
+        .alu_control(2'b00),
+        .shift_enable(1'b1),
+        .done()
+    );
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    initial begin
+        // Initial values
+        clk = 0;
+        reset = 1;
+        start = 0;
+        M_in = 8'b00000101; // Multiplicand
+        Q_in = 8'b00000011; // Multiplier
+
+        #10 reset = 0; // Release reset
+        start = 1;
+        #10 start = 0;
+
+        // Check the result
+        #100;
+        $display("Final Result: %d", result);
+
+        $stop;
+    end
+endmodule
 

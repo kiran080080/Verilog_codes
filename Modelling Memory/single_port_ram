@@ -1,1 +1,17 @@
-
+module ram1(addr,data,clk,rd,wr,cs);
+input [8:0] addr;
+input clk,rd,wr,cs;
+inout [7:0]data;//single port for data_in and data_out ,not recommended//mostly not synthesizable
+reg[7:0]mem[1023:0];
+reg[7:0]d_out;
+assign data=(cs&&rd)?d_out:8'bz;//because data needs to be wire thus not used inside a procedural block
+always@(posedge clk)
+begin
+if(cs&&wr&&!rd) 
+mem[addr]=data;
+always@(posedge clk)
+if(cs&&rd&&!wr)
+d_out=mem[addr];
+end
+endmodule
+// as of my knowledge input to a memory is usually clk triggered but output to a memory ,ie read is usually continusally driven

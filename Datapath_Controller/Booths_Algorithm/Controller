@@ -1,1 +1,79 @@
+module booth_controller (
+    input clk,
+    input reset,
+    input start,
+    output reg [1:0] alu_control,  // ALU control signal
+    output reg shift_enable,       // Shifter enable signal
+    output reg done                // Done flag for completion
+);
+
+    reg [2:0] state, next_state;
+    
+    // State encoding
+    localparam IDLE = 3'b000,
+               START = 3'b001,
+               ADD = 3'b010,
+               SUB = 3'b011,
+               SHIFT = 3'b100,
+               DONE = 3'b101;
+
+    always @(posedge clk or posedge reset) begin
+        if (reset)
+            state <= IDLE;
+        else
+            state <= next_state;
+    end
+
+    always @(*) begin
+        case(state)
+            IDLE: next_state = (start) ? START : IDLE;
+            START: next_state = ADD;
+            ADD: next_state = SHIFT;
+            SUB: next_state = SHIFT;
+            SHIFT: next_state = DONE;
+            DONE: next_state = IDLE;
+            default: next_state = IDLE;
+        endcase
+    end
+
+    always @(*) begin
+        case(state)
+            IDLE: begin
+                alu_control = 2'b00;
+                shift_enable = 0;
+                done = 0;
+            end
+            START: begin
+                alu_control = 2'b00; // No operation yet
+                shift_enable = 0;
+                done = 0;
+            end
+            ADD: begin
+                alu_control = 2'b00; // Add operation
+                shift_enable = 0;
+                done = 0;
+            end
+            SUB: begin
+                alu_control = 2'b01; // Subtract operation
+                shift_enable = 0;
+                done = 0;
+            end
+            SHIFT: begin
+                alu_control = 2'b10; // No operation, just shift
+                shift_enable = 1;
+                done = 0;
+            end
+            DONE: begin
+                alu_control = 2'b00;
+                shift_enable = 0;
+                done = 1; // Indicate multiplication is complete
+            end
+            default: begin
+                alu_control = 2'b00;
+                shift_enable = 0;
+                done = 0;
+            end
+        endcase
+    end
+endmodule
 

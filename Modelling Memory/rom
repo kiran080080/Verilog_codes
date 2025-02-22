@@ -11,3 +11,4 @@ case(addr)
 7:data=60;
 endcase
 endmodule
+//data can be only be read not changed during execution

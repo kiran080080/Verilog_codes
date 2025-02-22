@@ -1,11 +1,21 @@
-module subtractor (
-    input [15:0] A,       // Input A
-    input [15:0] B,       // Input B
-    output reg [15:0] diff // Difference (A - B)
+module comparator (
+    input [15:0] A,      // Input A
+    input [15:0] B,      // Input B
+    output reg A_greater_than_B, // Output signal: 1 if A > B, 0 otherwise
+    output reg B_greater_than_A  // Output signal: 1 if B > A, 0 otherwise
 );
 
     always @(*) begin
-        diff = A - B;  // Simple subtraction
+        if (A > B) begin
+            A_greater_than_B = 1;
+            B_greater_than_A = 0;
+        end else if (B > A) begin
+            A_greater_than_B = 0;
+            B_greater_than_A = 1;
+        end else begin
+            A_greater_than_B = 0;
+            B_greater_than_A = 0;
+        end
     end
 endmodule
 

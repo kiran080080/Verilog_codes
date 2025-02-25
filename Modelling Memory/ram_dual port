@@ -1,1 +1,19 @@
-
+module ram(data_out,data_in,addr,wr,cs,bus);
+parameter addr_size=10,word_size=8,memory_size=1024;
+input [addr_size-1:0]addr;
+input [word_size-1:0]data_in;
+input wr,cs;
+output [word_size-1:0]data_out;
+reg[word_size-1:0]mem[memory_size-1:0];
+assign data_out=mem[addr];
+always@(wr,cs)
+if(wr)mem[addr]=data_in;
+end module
+//use a bus if needed ,if using bus we need a buffer so the code will be
+/* 
+tri[word_size-1:0]bus;
+wire[word_size-1:0]data_out,data_in;
+assign bus =read?data_out:8'hzz;
+assign data_in=write?bus:8'hzz;
+*/
+   

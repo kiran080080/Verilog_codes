@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_add_mem_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_add_mem" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="150.701 ns"></ZoomEndTime>
+      <Cursor1Time time="39.500 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="533"></NameColumnWidth>
+      <ValueColumnWidth column_width="259"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="9" />
+   <wvobject fp_name="/tb_add_mem/rs1" type="array">
+      <obj_property name="ElementShortName">rs1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">rs1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_add_mem/rs2" type="array">
+      <obj_property name="ElementShortName">rs2[3:0]</obj_property>
+      <obj_property name="ObjectShortName">rs2[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_add_mem/rd" type="array">
+      <obj_property name="ElementShortName">rd[3:0]</obj_property>
+      <obj_property name="ObjectShortName">rd[3:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_add_mem/func" type="array">
+      <obj_property name="ElementShortName">func[3:0]</obj_property>
+      <obj_property name="ObjectShortName">func[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_add_mem/addr" type="array">
+      <obj_property name="ElementShortName">addr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_add_mem/z" type="array">
+      <obj_property name="ElementShortName">z[7:0]</obj_property>
+      <obj_property name="ObjectShortName">z[7:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_add_mem/clk1" type="logic">
+      <obj_property name="ElementShortName">clk1</obj_property>
+      <obj_property name="ObjectShortName">clk1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_add_mem/clk2" type="logic">
+      <obj_property name="ElementShortName">clk2</obj_property>
+      <obj_property name="ObjectShortName">clk2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_add_mem/i" type="array">
+      <obj_property name="ElementShortName">i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i[31:0]</obj_property>
+   </wvobject>
+</wave_config>

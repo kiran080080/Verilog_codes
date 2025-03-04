@@ -1,1 +1,8 @@
++INPUTS:3 register adresses(rs1,rs2,rd),an alu function(func),and a memory adresses(addr)
++stage 1:read 2 16 bit number from the register specified by rs1 and rs2 and store them
++stage 2:perform alu operation on the stored values specified by func and store it in z
++stage 3:write the value of z in the register specified by rd
++stage 4: also write the value of z in the memory location "addr"
 
+
+__for avoiding raxce around conditions 2 phase clock or master slave flipflop is used. here 2 phase clock is used

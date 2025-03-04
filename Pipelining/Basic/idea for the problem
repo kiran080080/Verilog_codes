@@ -1,1 +1,14 @@
-fbkdglbnkfg
+    We consider the example at very simple stage pipeline
+-4 n bit unsignd intgers a,b,c,d as inputs
+-an n bit unsigned integer f as output
+
++follwing are carried out
+-s1:x1=a=b x=c-d
+-s2:x3 =x1+x2
+-s3 f=x3*d
+
+
++points to note
+-input d used in s1 as well as s3
+-so the value of d must be forwarded to s2 and then to s3
+
